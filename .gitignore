@@ -34,3 +34,6 @@ replay_pid*
 
 # classptah file
 cp.txt
+
+# Docker
+Dockerfile

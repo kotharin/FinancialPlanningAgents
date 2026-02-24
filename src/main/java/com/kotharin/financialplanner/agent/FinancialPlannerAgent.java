@@ -1,14 +1,13 @@
 package com.kotharin.financialplanner.agent;
 
-import java.util.Map;
-
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.models.langchain4j.LangChain4j;
-import com.google.adk.tools.Annotations.Schema;
 import com.google.adk.tools.FunctionTool;
-import com.kotharin.financialplanner.utilities.Portfolio;
 
 import dev.langchain4j.model.openai.OpenAiChatModel;
+
+import com.kotharin.financialplanner.tool.ConcentratedPosition;
+import com.kotharin.financialplanner.tool.RiskScorePortfolio;
 
 /**
  * Shell for the FinancialPlanner Agent using Google ADK.
@@ -19,14 +18,6 @@ public class FinancialPlannerAgent {
 
     private static final String MODEL = "gpt-4.1"; // "gemini-3-flash-preview";
 
-    public static Map<String, String> getPortfolioByRiskScore(
-            @Schema(name = "riskScore", description = "Risk Score") Integer riskScore) {
-        String portfolio = Portfolio.getPortfolioByRiskScore(riskScore);
-        System.out.println("Risk Score: " + riskScore);
-        System.out.println("Portfolio: " + portfolio);
-        return Map.of("result", portfolio);
-    }
-
     public static LlmAgent getInstance() {
 
         OpenAiChatModel openAiModel = OpenAiChatModel.builder()
@@ -34,17 +25,20 @@ public class FinancialPlannerAgent {
                 .modelName(MODEL)
                 .build();
 
-        FunctionTool portfolioTool = FunctionTool.create(FinancialPlannerAgent.class, "getPortfolioByRiskScore");
-
+        FunctionTool portfolioTool = FunctionTool.create(RiskScorePortfolio.class, "getPortfolioByRiskScore");
+        FunctionTool concentratedPositionTool = FunctionTool.create(ConcentratedPosition.class,
+                "analyzeConcentratedPosition");
         return LlmAgent.builder()
                 .model(new LangChain4j(openAiModel))
                 .name("Financial Planner Agent")
-                .tools(portfolioTool)
+                .tools(portfolioTool, concentratedPositionTool)
                 .description(
                         "Financial Advisor Assistant whose goal is to ask qquestions and caculate the Risk Score and use the risk score to create a Base Portfolio for the user.")
                 .instruction(
                         """
-                                    You are a Financial Advisor Assistant. Your goal is to calculate the Risk Score for the user. Start by introducing yourself and what you are trying to achieve. Ask the user questions from the  RiskQuestions JSON provided below, from each Section in the JSON. Feel free to reword the questions as needed. Have the user respond in a conversational way so they don't feel like they are picking from a fixed choice but the answers should get mapped back to the choices present in the Answers in the JSON. After each answer provide some feedback to the user about what each answer means and how it impacts their Risk Score. Use the Score for each answer and at the end return the total of Scores (Total Score).  The final Risk Score is calculated using the formula: Risk Score = 100 - (100 * Total Score). Show the users Risk Score but not the calculation. After calculating the Risk Score, use the getPortfolioByRiskScore tool to get the users portfolio using the Risk Score and show the user their portfolio.
+                                    You are a Financial Advisor Assistant. Your goal is to calculate the Risk Score for the user. Start by introducing yourself and what you are trying to achieve. Ask the user questions from the  RiskQuestions JSON provided below, from each Section in the JSON. Feel free to reword the questions as needed. Have the user respond in a conversational way so they don't feel like they are picking from a fixed choice but the answers should get mapped back to the choices present in the Answers in the JSON. After each answer provide some feedback to the user about what each answer means and how it impacts their Risk Score. Use the Score for each answer and at the end return the total of Scores (Total Score).  The final Risk Score is calculated using the formula: Risk Score = 100 - (100 * Total Score).
+                                    Show the users Risk Score and the calculation. After calculating the Risk Score, use the getPortfolioByRiskScore tool to get the users portfolio using the Risk Score and show the user their portfolio.
+                                    After showing the Potfoio to the user, ask the user if they have any concentrated positions. If they do, use the analyzeConcentratedPosition tool to analyze the concentrated position and show the user the analysis.
 
                                     RiskQuestions
                                     {
