@@ -27,7 +27,7 @@ A Spring Boot application that uses Google's Agent Development Kit (ADK) to crea
 2. **Configure API Key**
    Create a `.env` file (if it doesn't exist) and add your OpenAI API key:
    ```properties
-   OPENAI.api-key=your-openai-api-key-here
+   OPENAI_API_KEY=your-openai-api-key-here
    ```
 
 ## Build
@@ -60,6 +60,16 @@ Run the Docker container:
 
 ```bash
 docker run -p 8080:8080 financial-planner-agent
+```
+
+Build and push image for GCP
+```bash
+docker buildx build --platform linux/amd64 -t us-east4-docker.pkg.dev/fp-ai-2025/gcp-repo/financial-planner-agent:latest . --push
+```
+
+Push the image to GCP
+```bash
+docker push us-east4-docker.pkg.dev/fp-ai-2025/gcp-repo/financial-planner-agent:latest
 ```
 
 ## API Endpoints
