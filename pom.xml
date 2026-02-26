@@ -23,6 +23,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Alpaca Java API -->
+        <dependency>
+            <groupId>net.jacobpeterson</groupId>
+            <artifactId>alpaca-java</artifactId>
+            <version>9.2.0</version>
+        </dependency>
+
         <!-- Google ADK -->
         <dependency>
             <groupId>com.google.adk</groupId>
