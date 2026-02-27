@@ -16,7 +16,7 @@ import com.kotharin.financialplanner.tool.RiskScorePortfolio;
  */
 public class FinancialPlannerAgent {
 
-    private static final String MODEL = "gpt-4.1"; // "gemini-3-flash-preview";
+    private static final String MODEL = "gpt-5.1"; // "gemini-3-flash-preview";
 
     private static final String PROMPT = """
             You are a Financial Advisor Assistant. Your goal is to calculate the Risk Score, Portfolio and analyze their Conentrated Position, if any for the user. The response format for each step is provided.
@@ -189,6 +189,7 @@ public class FinancialPlannerAgent {
                                             {
                                                 "Name": "<Name>",
                                                 "ResponseType": "Portfolio",
+                                                "NextQuestion": "Do you have any concentrated positions in your portfolio? If so please provide the ticker symbol and the date you acquired it.",
                                                 "Calculation": "<Calculation>",
                                                 "TotalScore": "<TotalScore>",
                                                 "RiskScore": "<RiskScore>",
@@ -200,7 +201,8 @@ public class FinancialPlannerAgent {
                                             {
                                                 "Name": "<Name>",
                                                 "ResponseType": "ConcentratedPosition",
-                                                "Analysis": "<Analysis>"
+                                                "Analysis": "<Analysis>",
+                                                "HistoricalPrices": "<HistoricalPrices>" // Array of objects with date and price
                                             }
 
                                             RiskQuestions

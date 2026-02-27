@@ -7,7 +7,10 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.kotharin.financialplanner.model.ConcentratedPositionAnalysis;
 
 import com.google.adk.tools.Annotations.Schema;
 import com.google.adk.tools.ToolContext;
@@ -25,7 +28,7 @@ public class ConcentratedPosition {
     private static final String ALPACA_SECRET_KEY = System.getenv("ALPACA_SECRET_KEY");
 
     @Tool(name = "analyzeConcentratedPosition")
-    public static Map<String, String> analyzeConcentratedPosition(
+    public static ConcentratedPositionAnalysis analyzeConcentratedPosition(
             @Schema(name = "riskScore", description = "Risk Score") Integer riskScore,
             @Schema(name = "symbol", description = "Concenbtrated Position Symbol") String symbol,
             @Schema(name = "dateAcquired", description = "Date Acquired") String dateAcquired,
@@ -41,7 +44,7 @@ public class ConcentratedPosition {
         Map<String, BigDecimal> historicalPrices = getHistoricalPrices(symbol, dateAcquired);
         System.out.println("----Concentrated Position----Historical Prices: " + historicalPrices);
 
-        return Map.of("analysis", analysis);
+        return new ConcentratedPositionAnalysis(analysis, historicalPrices);
     }
 
     public static Map<String, BigDecimal> getHistoricalPrices(String symbol, String dateAcquiredStr) {
