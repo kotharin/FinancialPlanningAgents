@@ -10,13 +10,13 @@ import dev.langchain4j.agent.tool.Tool;
 
 public class RiskScorePortfolio {
 
-    @Tool(name = "getPortfolioByRiskScore")
-    public static Map<String, String> getPortfolioByRiskScore(
+    @Tool(name = "getRiskCommentary")
+    public static Map<String, String> getRiskCommentary(
             @Schema(name = "riskScore", description = "Risk Score") Integer riskScore,
             @Schema(name = "toolContext", description = "the tool context") ToolContext toolContext) {
         String portfolio = Portfolio.getPortfolioByRiskScore(riskScore);
-        System.out.println("Risk Score: " + riskScore);
-        System.out.println("Portfolio: " + portfolio);
-        return Map.of("result", portfolio);
+        System.out.println("--------Risk Score: " + riskScore);
+        System.out.println("--------Portfolio: " + portfolio);
+        return Map.of("riskCommentary", portfolio);
     }
 }

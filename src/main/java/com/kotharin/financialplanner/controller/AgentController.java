@@ -43,9 +43,12 @@ public class AgentController {
             }
         });
 
+        // System.out.println("Response: " + response.toString());
+
         // Populate the AgentResponse
-        AgentResponse ar = new AgentResponse("", response.toString());
-        return ar.toJson();
+        // AgentResponse ar = new AgentResponse("", response.toString());
+        // return ar.toJson();
+        return response.toString();
     }
 
 }
