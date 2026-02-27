@@ -6,7 +6,6 @@ import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import com.kotharin.financialplanner.agent.FinancialPlannerAgent;
-import com.kotharin.financialplanner.model.AgentResponse;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -43,11 +42,6 @@ public class AgentController {
             }
         });
 
-        // System.out.println("Response: " + response.toString());
-
-        // Populate the AgentResponse
-        // AgentResponse ar = new AgentResponse("", response.toString());
-        // return ar.toJson();
         return response.toString();
     }
 
