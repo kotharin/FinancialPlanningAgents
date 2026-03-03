@@ -9,6 +9,7 @@ import com.kotharin.financialplanner.agent.FinancialPlannerAgent;
 
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/agent")
 public class AgentController {
