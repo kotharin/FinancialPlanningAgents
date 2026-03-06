@@ -38,24 +38,26 @@ public class FinancialPlannerAgent {
                     "PreviousQuestionScore": "<PreviousQuestionScore>"
                 }
                 3. Use the Score for each answer and at the end return the total of Scores (Total Score).  The final Risk Score is calculated using the formula: Risk Score = 100 - (100 * Total Score).
-                Use the getRiskCommentary tool to get the users Risk Commentary using the Risk Score.
+                Use the getRiskCommentary tool to get the users Risk Commentary using the Risk Score as-is without any adjustment.
                 Response Format:
                 {
                     "Name": "<Name>",
                     "ResponseType": "Portfolio",
-                    "NextQuestion": "Do you have any concentrated positions in your portfolio? If so please provide the ticker symbol and the date you acquired it.",
+                    "NextQuestion": "Do you have any concentrated positions in your portfolio? If so please provide the ticker symbol, number of shares and the date you acquired it.",
                     "Calculation": "<Calculation>",
                     "TotalScore": "<TotalScore>",
-                    "RiskScore": "<RiskScore>",
+                    "RiskScore": "<Risk Score>",
                     "RiskCommentary": "<RiskCommentary>"
                 }
                 4. If the user specifies they have a concentrated position use the analyzeConcentratedPosition tool to analyze the concentrated position and show the user the analysis.
-                Do not add any more data than returned in the analysis.
+                If the user doesn't provide all the details for the concentrated position, ask the user for the missing details in FollowUpQuestion. If you have the information needed and don't need to ask any followup questions, return an empty string for the FollowUpQuestion.
+                Do not add any more data than returned in the analysis. Do not change the name of any of the fields in the response.
                 Response Format:
                 {
                     "Name": "<Name>",
                     "ResponseType": "ConcentratedPosition",
                     "Analysis": "<Analysis>",
+                    "FollowUpQuestion": "<FollowUpQuestion>",
                     "HistoricalPrices": "<HistoricalPrices>" // Array of objects with date and price
                 }
 

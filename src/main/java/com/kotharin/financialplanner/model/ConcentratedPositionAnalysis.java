@@ -1,41 +1,39 @@
 package com.kotharin.financialplanner.model;
 
-import java.math.BigDecimal;
-import java.util.Map;
-
 public class ConcentratedPositionAnalysis {
-    private String analysis;
-    private Map<String, BigDecimal> historicalPrices;
+    private String symbol;
+    private BaselineResult baselineResult;
+    private CoveredCallSummary coveredCallSummary;
 
-    public ConcentratedPositionAnalysis() {
+    public ConcentratedPositionAnalysis(String symbol, BaselineResult baselineResult,
+            CoveredCallSummary coveredCallSummary) {
+        this.symbol = symbol;
+        this.baselineResult = baselineResult;
+        this.coveredCallSummary = coveredCallSummary;
     }
 
-    public ConcentratedPositionAnalysis(String analysis, Map<String, BigDecimal> historicalPrices) {
-        this.analysis = analysis;
-        this.historicalPrices = historicalPrices;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public String getAnalysis() {
-        return analysis;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    public void setAnalysis(String analysis) {
-        this.analysis = analysis;
+    public BaselineResult getBaselineResult() {
+        return baselineResult;
     }
 
-    public Map<String, BigDecimal> getHistoricalPrices() {
-        return historicalPrices;
-    }
-
-    public void setHistoricalPrices(Map<String, BigDecimal> historicalPrices) {
-        this.historicalPrices = historicalPrices;
+    public CoveredCallSummary getCoveredCallSummary() {
+        return coveredCallSummary;
     }
 
     @Override
     public String toString() {
-        return "ConcentratedPositionAnalysis{" +
-                "analysis='" + analysis + '\'' +
-                ", historicalPrices=" + historicalPrices +
+        return "ConcentratedPositionAnalysis {" +
+                "symbol='" + symbol + '\'' +
+                ", baselineResult=" + baselineResult +
+                ", coveredCallSummary=" + coveredCallSummary +
                 '}';
     }
 }
