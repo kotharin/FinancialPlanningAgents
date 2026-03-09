@@ -406,7 +406,7 @@ public class ConcentratedPosition {
     public static String analyzeConcentratedPosition(
             @Schema(name = "riskScore", description = "Risk Score") Integer riskScore,
             @Schema(name = "symbol", description = "Concenbtrated Position Symbol") String symbol,
-            @Schema(name = "dateAcquired", description = "Date Acquired") String dateAcquired,
+            @Schema(name = "dateAcquired", description = "Date Acquired in YYYY-MM-DD format") String dateAcquired,
             @Schema(name = "initialShares", description = "Initial Shares") Integer initialShares,
             @Schema(name = "toolContext", description = "the tool context") ToolContext toolContext) {
         String analysis = "You have a high concentration in " + symbol

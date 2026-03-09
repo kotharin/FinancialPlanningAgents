@@ -84,16 +84,24 @@ public class CoveredCallSummary {
         this.finalShares = finalShares;
     }
 
+    @Override
     public String toString() {
-        return "CoveredCallSummary {" +
-                "ccResults=" + ccResults +
-                ", initialValue=" + initialValue +
-                ", finalStockValue=" + finalStockValue +
-                ", finalCash=" + finalCash +
-                ", finalPortfolioValue=" + finalPortfolioValue +
-                ", totalPnL=" + totalPnL +
-                ", finalShares=" + finalShares +
+        String ccResultsStr = "{}";
+        try {
+            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            ccResultsStr = mapper.writeValueAsString(ccResults);
+        } catch (Exception e) {
+            ccResultsStr = String.valueOf(ccResults);
+        }
+
+        return "{" +
+                "\"ccResults\":" + ccResultsStr +
+                ", \"initialValue\":" + initialValue +
+                ", \"finalStockValue\":" + finalStockValue +
+                ", \"finalCash\":" + finalCash +
+                ", \"finalPortfolioValue\":" + finalPortfolioValue +
+                ", \"totalPnL\":" + totalPnL +
+                ", \"finalShares\":" + finalShares +
                 '}';
     }
-
 }

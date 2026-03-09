@@ -106,19 +106,20 @@ public class BaselineResult {
         this.historicalPrices = historicalPrices;
     }
 
+    @Override
     public String toString() {
-        return "BaselineResult{" +
-                "historicalPrices=" + historicalPrices +
-                ", initialShares=" + initialShares +
-                ", finalShares=" + finalShares +
-                ", stockValues=" + stockValues +
-                ", initialValue=" + initialValue +
-                ", finalValue=" + finalValue +
-                ", percentReturn=" + percentReturn +
-                ", stockPnL=" + stockPnL +
-                ", optionPnL=" + optionPnL +
-                ", totalPnL=" + totalPnL +
-                ", totalTaxes=" + totalTaxes +
+        return "{" +
+                "\"historicalPrices\":\"" + historicalPrices + "\"" +
+                ", \"initialShares\":" + initialShares +
+                ", \"finalShares\":" + finalShares +
+                ", \"stockValues\":\"" + stockValues + "\"" +
+                ", \"initialValue\":" + initialValue +
+                ", \"finalValue\":" + finalValue +
+                ", \"percentReturn\":" + percentReturn +
+                ", \"stockPnL\":" + stockPnL +
+                ", \"optionPnL\":" + optionPnL +
+                ", \"totalPnL\":" + totalPnL +
+                ", \"totalTaxes\":" + totalTaxes +
                 '}';
     }
 

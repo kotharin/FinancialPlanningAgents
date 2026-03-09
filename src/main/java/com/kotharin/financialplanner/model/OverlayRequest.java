@@ -213,9 +213,9 @@ public class OverlayRequest {
         private Integer dteDays = 45;
         private Integer rollFrequencyDays = 30;
         private Double coveragePct = 50.0;
-        private Boolean enableTaxLossHarvest = true;
+        private Boolean enableTaxLossHarvest = false;
         private Double positionReductionPctPerQuarter = 0.0;
-        private Double reductionThresholdPct = null;
+        private Double reductionThresholdPct = 0.05;
         private Double shareReductionTriggerPct = 0.0;
         private BigDecimal costBasis = BigDecimal.ZERO;
         private Integer targetDteDays = 30;

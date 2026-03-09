@@ -30,10 +30,10 @@ public class ConcentratedPositionAnalysis {
 
     @Override
     public String toString() {
-        return "ConcentratedPositionAnalysis {" +
-                "symbol='" + symbol + '\'' +
-                ", baselineResult=" + baselineResult +
-                ", coveredCallSummary=" + coveredCallSummary +
-                '}';
+        return "{\"ConcentratedPositionAnalysis\": {" +
+                "\"symbol\":\"" + symbol + '\'' +
+                ", \"baselineResult\":" + baselineResult +
+                ", \"coveredCallSummary\":" + coveredCallSummary +
+                "}}";
     }
 }

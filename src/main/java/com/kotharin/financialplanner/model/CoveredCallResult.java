@@ -180,4 +180,27 @@ public class CoveredCallResult {
     public void setExitReason(String exitReason) {
         this.exitReason = exitReason;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"shares\":" + shares +
+                ", \"coveredShares\":" + coveredShares +
+                ", \"strikePrice\":" + strikePrice +
+                ", \"optionPremium\":" + optionPremium +
+                ", \"stockValue\":" + stockValue +
+                ", \"stockPnL\":" + stockPnL +
+                ", \"optionPnL\":" + optionPnL +
+                ", \"cumulativeTaxes\":" + cumulativeTaxes +
+                ", \"cumulativeTLH\":" + cumulativeTLH +
+                ", \"realizedStockGain\":" + realizedStockGain +
+                ", \"cash\":" + cash +
+                ", \"portfolioValue\":" + portfolioValue +
+                ", \"totalPnL\":" + totalPnL +
+                ", \"optionMark\":" + optionMark +
+                ", \"intrinsic\":" + intrinsic +
+                ", \"extrinsic\":" + extrinsic +
+                ", \"exitReason\":" + exitReason +
+                '}';
+    }
 }
